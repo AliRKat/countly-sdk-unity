@@ -346,8 +346,11 @@ namespace Plugins.CountlySDK.Services
 
                 updatedConsents.Add(consent);
                 CountlyConsents[consent] = value;
+            }
 
-                Log.Debug("[ConsentCountlyService] Setting consent for: [" + consent.ToString() + "] with value: [" + value + "]");
+            if (updatedConsents.Count > 0) {
+                Log.Debug("[ConsentCountlyService] Updated consents with value [" + value + "]:\n" +
+                    string.Join("\n", updatedConsents.Select(c => "- " + c.ToString())));
             }
 
             if (sendRequest && updatedConsents.Count > 0) {
