@@ -86,13 +86,6 @@ namespace Plugins.CountlySDK
         public StarRatingCountlyService StarRating { get; private set; }
 
         /// <summary>
-        /// Exposes functionality to set and change custom user properties and interact with custom property modifiers.
-        /// </summary>
-        /// <returns>UserDetailsCountlyService</returns>
-        [Obsolete("UserDetailsCountlyService is deprecated and will be removed in the future. Please use UserProfile instead.")]
-        public UserDetailsCountlyService UserDetails { get; private set; }
-
-        /// <summary>
         /// Exposes functionality for managing view lifecycle with segmentation options. Includes global view segmentation and adding segmentation to ongoing views.
         /// </summary>
         public IViewModule Views { get; private set; }
@@ -320,7 +313,6 @@ namespace Plugins.CountlySDK
             Initialization = new InitializationCountlyService(Configuration, _logHelper, Location, Session, Consents);
             RemoteConfigs = new RemoteConfigCountlyService(Configuration, _logHelper, RequestHelper, countlyUtils, configDao, Consents, requestBuilder);
             StarRating = new StarRatingCountlyService(Configuration, _logHelper, Consents, Events);
-            UserDetails = new UserDetailsCountlyService(Configuration, _logHelper, RequestHelper, countlyUtils, Consents);
             UserProfile = new UserProfile(this, Configuration, _logHelper, RequestHelper, countlyUtils, Consents, Events);
             Views = new ViewCountlyService(this, countlyUtils, Configuration, _logHelper, Events, Consents);
             Device = new DeviceIdCountlyService(Configuration, _logHelper, Session, RequestHelper, Events, countlyUtils, Consents);
@@ -352,7 +344,6 @@ namespace Plugins.CountlySDK
             _listeners.Add(Location);
             _listeners.Add(Consents);
             _listeners.Add(StarRating);
-            _listeners.Add(UserDetails);
             _listeners.Add((UserProfile)UserProfile);
             _listeners.Add(CrashReports);
             _listeners.Add(RemoteConfigs);
